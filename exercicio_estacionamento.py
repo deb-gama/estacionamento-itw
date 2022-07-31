@@ -71,24 +71,27 @@ class VagaCarro(Vaga):
         self.tipo = 'Carro'
         print(f'Vaga tipo: {self.tipo}, Placa: {self.placa}, Id - {self.vaga_id}')
 
-placas = ['eee-1234','eee-1235','eee-1236']
-vagas = []
+# placas = ['eee-1234','eee-1235','eee-1236']
+# vagas = []
 
-for placa in placas:
-    vaga = VagaMoto(placa)
+# for placa in placas:
+#     vaga = VagaMoto(placa)
 
-for placa in placas:
-    vaga = VagaCarro(placa)
-  
-
-
-
-
+# for placa in placas:
+#     vaga = VagaCarro(placa)
   
 
 class Carro:
-    def __init__(self, placa):
+    def __init__(self, placa, modelo):
         self.estacionado = False
         self.placa = placa
+        self.modelo = modelo
 
-        
+        if self.estacionado is True:
+            print(f'{self.modelo} placa {self.placa} - Estacionado')
+        else :
+            print(f'{self.modelo} placa {self.placa} - Aguardando para estacionar')
+
+
+
+carro = Carro('EEE-1234','Palio')
