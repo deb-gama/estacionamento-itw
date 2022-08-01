@@ -45,6 +45,10 @@ class Estacionamento():
     def listar_carros_estacionados(self):
         for carro in self.carros_estacionados:
             print(carro)
+
+    def listar_motos_estacionadas(self):
+        for moto in self.motos_estacionadas:
+            print(moto)
     
 
     def estacionar_carro(self, carro, placa, vaga_id):
@@ -60,6 +64,18 @@ class Estacionamento():
             self.carros_estacionados.append(vaga_livre_carro)
             self.listar_carros_estacionados()
             
+    def estacionar_moto(self, moto, placa, vaga_id):
+        self.moto = moto
+        self.placa = placa
+        self.vaga = vaga_id
+    
+        if self.vagas_moto > 0:
+            self.vagas_moto -= 1
+            vaga_livre_moto = self.vagas_livres_moto.pop(0)
+            vaga_livre_moto.placa = placa
+            vaga_livre_moto.livre = False
+            self.motos_estacionadas.append(vaga_livre_moto)
+            self.listar_motos_estacionadas()
             
                 
         # print(f'O carro {self.carro}, placa {self.placa} está estacionado na vaga {self.vaga}')
@@ -149,6 +165,10 @@ estacionamento.status_estacionamento()
 estacionamento.estacionar_carro('Palio', 'EEE-1234', '2455353')
 estacionamento.status_estacionamento()
 estacionamento.listar_carros_estacionados()
+
+estacionamento.estacionar_moto('PCX', 'FFF-0000', 'SYD353')
+estacionamento.status_estacionamento()
+estacionamento.listar_motos_estacionadas()
 
 
 
