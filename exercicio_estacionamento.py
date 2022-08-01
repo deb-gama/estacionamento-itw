@@ -43,16 +43,23 @@ class Estacionamento():
     
 
     def listar_carros_estacionados(self):
-        for carro in self.carros_estacionados:
-            print(carro)
+        if len(self.carros_estacionados) > 0:
+            for carro in self.carros_estacionados:
+                print(carro)
+        else:
+            print('Não existem carros estacionados no momento.')
+
 
     def listar_motos_estacionadas(self):
-        for moto in self.motos_estacionadas:
-            print(moto)
+        if len(self.motos_estacionadas) > 0:
+            for moto in self.motos_estacionadas:
+                print(moto)
+        else:
+            print('Não existem motos estacionadas no momento.')
     
 
-    def estacionar_carro(self, carro, placa, vaga_id):
-        self.carro = carro
+    def estacionar_carro(self, modelo, placa, vaga_id):
+        self.modelo = modelo
         self.placa = placa
         self.vaga = vaga_id
     
@@ -62,10 +69,11 @@ class Estacionamento():
             vaga_livre_carro.placa = placa
             vaga_livre_carro.livre = False
             self.carros_estacionados.append(vaga_livre_carro)
-            self.listar_carros_estacionados()
+            print(vaga_livre_carro)
+      
             
-    def estacionar_moto(self, moto, placa, vaga_id):
-        self.moto = moto
+    def estacionar_moto(self, modelo, placa, vaga_id):
+        self.modelo = modelo
         self.placa = placa
         self.vaga = vaga_id
     
@@ -75,11 +83,32 @@ class Estacionamento():
             vaga_livre_moto.placa = placa
             vaga_livre_moto.livre = False
             self.motos_estacionadas.append(vaga_livre_moto)
-            self.listar_motos_estacionadas()
+            print(vaga_livre_moto)
+           
             
-                
-        # print(f'O carro {self.carro}, placa {self.placa} está estacionado na vaga {self.vaga}')
-        # print(f'O total de vagas livres para carros agora é {self.vagas_carro}')
+
+    def remover_carro(self,placa):
+        for carro in self.carros_estacionados:
+            if carro.placa == placa:
+                carro_remover = self.carros_estacionados.index(carro)
+                carro_removido = self.carros_estacionados.pop(carro_remover)
+                carro_removido.livre = True
+                self.vagas_livres_carro.append(carro_removido)
+                print(f'Carro, placa: {placa} removido com sucesso.')
+            else:
+                print('Placa não encontrada.')
+
+
+    def remover_moto(self,placa):
+        for moto in self.motos_estacionadas:
+            if moto.placa == placa:
+                moto_remover = self.motos_estacionadas.index(moto)
+                moto_removida = self.motos_estacionadas.pop(moto_remover)
+                moto_removida.livre = True
+                self.vagas_livres_moto.append(moto_removida)
+                print(f'Moto, placa: {placa} removido com sucesso.')
+            else:
+                print('Placa não encontrada.')
 
         
 # estacionamento = Estacionamento()
@@ -160,17 +189,51 @@ def criando_vagas():
         estacionamento.vagas_livres_carro.append(vaga_carro)
 
 criando_vagas()
+
+print('PRIMEIRO STATUS')
 estacionamento.status_estacionamento()
 
+print('ESTACIONANDO CARRO')
 estacionamento.estacionar_carro('Palio', 'EEE-1234', '2455353')
+print('STATUS PÓS ESTACIONAMENTO CARRO')
 estacionamento.status_estacionamento()
-estacionamento.listar_carros_estacionados()
 
+
+print('ESTACIONANDO MOTO')
 estacionamento.estacionar_moto('PCX', 'FFF-0000', 'SYD353')
+print('STATUS PÓS ESTACIONAMENTO CARRO E MOTO')
 estacionamento.status_estacionamento()
+
+print('LISTANDO CARROS E MOTOS ESTACIONADOS')
+estacionamento.listar_carros_estacionados()
 estacionamento.listar_motos_estacionadas()
 
+print('REMOVENDO CARRO COM PLACA ERRADA')
+estacionamento.remover_carro('OOO-1111')
 
+print('REMOVENDO CARRO COM PLACA CORRETA')
+estacionamento.remover_carro('EEE-1234')
 
+print('STATUS PÓS REMOÇÃO DO CARRO')
+estacionamento.status_estacionamento()
+
+print('LISTANDO VAGAS DE CARRO')
+estacionamento.listar_vagas_livres_carro()
+
+print('REMOVENDO MOTO COM PLACA ERRADA')
+estacionamento.remover_moto('EEE-1234')
+
+print('REMOVENDO MOTO COM PLACA CORRETA')
+estacionamento.remover_moto('FFF-0000')
+
+print('STATUS PÓS REMOÇÃO DA MOTO')
+estacionamento.status_estacionamento()
+
+print('LISTANDO VAGAS DE MOTO')
+estacionamento.listar_vagas_livres_moto()
+
+print('LISTANDO VEICULOS ESTACIONADOS')
+estacionamento.listar_carros_estacionados()
+estacionamento.listar_motos_estacionadas()
 
 # carro = Carro('EEE-1234','Palio')
