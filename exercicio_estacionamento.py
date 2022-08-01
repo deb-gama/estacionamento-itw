@@ -16,7 +16,6 @@ import uuid
 # total de vagas livres
 class Estacionamento():
     def __init__(self):
-        self.veiculos_estacionados = []
         self.vagas_carro = 0
         self.vagas_moto = 0
         self.vagas_livres_carro = []
@@ -41,17 +40,30 @@ class Estacionamento():
     def listar_vagas_livres_carro(self):
         for vaga in self.vagas_livres_carro:
             print(vaga)
-       
+    
+
+    def listar_carros_estacionados(self):
+        for carro in self.carros_estacionados:
+            print(carro)
+    
 
     def estacionar_carro(self, carro, placa, vaga_id):
         self.carro = carro
         self.placa = placa
         self.vaga = vaga_id
-   
+    
         if self.vagas_carro > 0:
             self.vagas_carro -= 1
-        print(f'O carro {self.carro}, placa {self.placa} está estacionado na vaga {self.vaga}')
-        print(f'O total de vagas livres para carros agora é {self.vagas_carro}')
+            vaga_livre_carro = self.vagas_livres_carro.pop(0)
+            vaga_livre_carro.placa = placa
+            vaga_livre_carro.livre = False
+            self.carros_estacionados.append(vaga_livre_carro)
+            self.listar_carros_estacionados()
+            
+            
+                
+        # print(f'O carro {self.carro}, placa {self.placa} está estacionado na vaga {self.vaga}')
+        # print(f'O total de vagas livres para carros agora é {self.vagas_carro}')
 
         
 # estacionamento = Estacionamento()
@@ -129,12 +141,14 @@ def criando_vagas():
         vaga_moto = VagaMoto()
         estacionamento.vagas_livres_moto.append(vaga_moto)
         vaga_carro = VagaCarro()
-        estacionamento.vagas_livres_carro.append(vaga_moto)
+        estacionamento.vagas_livres_carro.append(vaga_carro)
 
 criando_vagas()
-# estacionamento.status_estacionamento()
+estacionamento.status_estacionamento()
 
-estacionamento.listar_vagas_livres_carro()
+estacionamento.estacionar_carro('Palio', 'EEE-1234', '2455353')
+estacionamento.status_estacionamento()
+estacionamento.listar_carros_estacionados()
 
 
 
