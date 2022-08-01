@@ -14,34 +14,44 @@ import uuid
 # devo saber o total vagas
 # total de vagas de cada tipo
 # total de vagas livres
-class Estacionamento:
+class Estacionamento():
     def __init__(self):
-        self.vagas_carro = 25
-        self.vagas_moto = 25
-        self.vagas_livres_carro = 25
-        self.vagas_livres_moto = 25
+        self.veiculos_estacionados = []
+        self.vagas_carro = 0
+        self.vagas_moto = 0
+        self.vagas_livres_carro = []
+        self.vagas_livres_moto = []
+        self.carros_estacionados = []
+        self.motos_estacionadas = []
 
     def status_estacionamento(self):
+        self.vagas_moto = len(self.vagas_livres_moto) + len(self.motos_estacionadas)
+        self.vagas_carro = len(self.vagas_livres_carro) + len(self.carros_estacionados)
         self.total = self.vagas_carro + self.vagas_moto
+
         print(f'Este estacionamento possui um total de {self.total} vagas, sendo {self.vagas_moto} vagas de moto e {self.vagas_carro} vagas de carro.')
-        print(f'No momento, existem {self.vagas_livres_moto} vagas livres para moto e {self.vagas_livres_carro} vagas livres para carros.')
+        print(f'No momento, existem {len(self.vagas_livres_moto)} vagas livres para moto e {len(self.vagas_livres_carro)} vagas livres para carros.')
         return self.total
 
-    def vagas_livres_moto(self):
-        print(f'O estacionamento possui {self.vagas_livres_moto} vagas livres para motos')
-        return self.vagas_livres_moto
+    def listar_vagas_livres_moto(self):
+        for vaga in self.vagas_livres_moto:
+            print(vaga)
+    
 
-    def vagas_livres_carro(self):
-        print(f'O estacionamento possui {self.vagas_livres_carro} vagas livres para motos')
-        return self.vagas_livres_moto
+    def listar_vagas_livres_carro(self):
+        for vaga in self.vagas_livres_carro:
+            print(vaga)
+       
 
     def estacionar_carro(self, carro, placa, vaga_id):
         self.carro = carro
         self.placa = placa
         self.vaga = vaga_id
-        self.vagas_livres_carro -= 1
+   
+        if self.vagas_carro > 0:
+            self.vagas_carro -= 1
         print(f'O carro {self.carro}, placa {self.placa} está estacionado na vaga {self.vaga}')
-        print(f'O total de vagas livres para carros agora é {self.vagas_livres_carro}')
+        print(f'O total de vagas livres para carros agora é {self.vagas_carro}')
 
         
 # estacionamento = Estacionamento()
@@ -51,25 +61,43 @@ class Estacionamento:
 # estacionamento.status_estacionamento()
 
 class Vaga:
-    def __init__(self, placa):
+    def __init__(self):
         self.vaga_id = 0
         self.livre = False
-        self.placa = placa
+        self.placa = ''
         self.tipo = 'Vaga'
     
 class VagaMoto(Vaga):
-    def __init__(self, placa):
-        super().__init__(placa)
+    def __init__(self):
+        super().__init__()
         self.vaga_id = uuid.uuid4()
         self.tipo = 'Moto'
-        print(f'Vaga tipo: {self.tipo}, Placa: {self.placa}, Id - {self.vaga_id}')
+        self.livre = True
+        # print(f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}')
+
+    def __str__(self) -> str:
+        if not self.livre:
+            return f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}, Status - Ocupada, Placa: {self.placa}'
+        else:
+            return f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}, Status - Livre'
+
 
 class VagaCarro(Vaga):
-    def __init__(self, placa):
-        super().__init__(placa)
+    def __init__(self):
+        super().__init__()
         self.vaga_id = uuid.uuid4()
         self.tipo = 'Carro'
-        print(f'Vaga tipo: {self.tipo}, Placa: {self.placa}, Id - {self.vaga_id}')
+        self.livre = True
+        # print(f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}')
+
+    def __str__(self) -> str:
+        if not self.livre:
+            return f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}, Status - Ocupada, Placa - {self.placa}'
+        else:
+            return f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}, Status - Livre'
+
+
+
 
 # placas = ['eee-1234','eee-1235','eee-1236']
 # vagas = []
@@ -94,4 +122,21 @@ class Carro:
 
 
 
-carro = Carro('EEE-1234','Palio')
+estacionamento = Estacionamento()
+
+def criando_vagas():
+    for _ in range(25):
+        vaga_moto = VagaMoto()
+        estacionamento.vagas_livres_moto.append(vaga_moto)
+        vaga_carro = VagaCarro()
+        estacionamento.vagas_livres_carro.append(vaga_moto)
+
+criando_vagas()
+# estacionamento.status_estacionamento()
+
+estacionamento.listar_vagas_livres_carro()
+
+
+
+
+# carro = Carro('EEE-1234','Palio')
