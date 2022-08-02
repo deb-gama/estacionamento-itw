@@ -61,7 +61,6 @@ class Estacionamento():
     def estacionar_carro(self, modelo, placa):
         self.modelo = modelo
         self.placa = placa
-        # self.vaga = vaga_id
     
         if self.vagas_carro > 0:
             self.vagas_carro -= 1
@@ -77,7 +76,6 @@ class Estacionamento():
     def estacionar_moto(self, modelo, placa):
         self.modelo = modelo
         self.placa = placa
-        self.vaga = vaga_id
     
         if self.vagas_moto > 0:
             self.vagas_moto -= 1
@@ -159,9 +157,37 @@ class VagaCarro(Vaga):
             return f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}, Status - Livre'
 
 
-class Carro:
-    def __init__(self, modelo, placa):
+class Veiculo:
+    def __init__(self):
         self.estacionado = False
+        self.placa = ''
+        self.modelo = ''
+        self.tipo = 'Veículo'
+
+
+class Carro(Veiculo):
+    def __init__(self, modelo, placa):
+        super().__init__()
+        self.tipo = 'Carro'
+        self.placa = placa
+        self.modelo = modelo
+
+    def __str__(self) -> str:
+        if self.estacionado is True:
+            return f'{self.modelo} placa {self.placa} - Estacionado'
+        else:
+            return f'{self.modelo} placa {self.placa} - Aguardando para estacionar'
+
+    def estacionar(self, estacionamento):
+        self.estacionado = True
+        estacionamento.estacionar_carro(self.modelo, self.placa)
+        print('Carro estacionado')
+
+
+class Moto(Veiculo):
+    def __init__(self, modelo, placa):
+        super().__init__()
+        self.tipo = 'Moto'
         self.placa = placa
         self.modelo = modelo
 
@@ -172,13 +198,11 @@ class Carro:
             return f'{self.modelo} placa {self.placa} - Aguardando para estacionar'
 
 
-
     def estacionar(self, estacionamento):
         self.estacionado = True
-        estacionamento.estacionar_carro(self.modelo, self.placa)
-        print('Carro estacionado')
+        estacionamento.estacionar_moto(self.modelo, self.placa)
+        print('Moto estacionada.')
 
-    
 
 
 
@@ -198,25 +222,36 @@ criando_vagas()
 print('PRIMEIRO STATUS')
 estacionamento.status_estacionamento()
 
+print('-------------------------------------------')
 print('CRIANDO CARRO')
 carro_teste = Carro('Palio', 'EEE-1234')
 print(carro_teste)
 
+print('-------------------------------------------')
 print('ESTACIONANDO CARRO CRIADO')
 carro_teste.estacionar(estacionamento)
 
+print('-------------------------------------------')
 print('STATUS PÓS ESTACIONAMENTO CARRO')
 estacionamento.status_estacionamento()
 
+print('-------------------------------------------')
+print('CRIANDO MOTO')
+moto_teste = Moto('PCX', 'EXX-1234')
+print(moto_teste)
 
-# print('ESTACIONANDO MOTO')
-# estacionamento.estacionar_moto('PCX', 'FFF-0000', 'SYD353')
-# print('STATUS PÓS ESTACIONAMENTO CARRO E MOTO')
-# estacionamento.status_estacionamento()
+print('-------------------------------------------')
+print('ESTACIONANDO MOTO CRIADA')
+moto_teste.estacionar(estacionamento)
 
-# print('LISTANDO CARROS E MOTOS ESTACIONADOS')
-# estacionamento.listar_carros_estacionados()
-# estacionamento.listar_motos_estacionadas()
+print('-------------------------------------------')
+print('STATUS PÓS ESTACIONAMENTO CARRO E MOTO')
+estacionamento.status_estacionamento()
+
+print('-------------------------------------------')
+print('LISTANDO CARROS E MOTOS ESTACIONADOS')
+estacionamento.listar_carros_estacionados()
+estacionamento.listar_motos_estacionadas()
 
 # print('REMOVENDO CARRO COM PLACA ERRADA')
 # estacionamento.remover_carro('OOO-1111')
