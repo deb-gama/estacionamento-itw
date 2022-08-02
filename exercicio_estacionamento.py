@@ -164,6 +164,28 @@ class Veiculo:
         self.modelo = ''
         self.tipo = 'Veículo'
 
+    def estacionar(self, estacionamento):
+        self.estacionado = True
+
+        if self.tipo == 'Carro':
+            estacionamento.estacionar_carro(self.modelo, self.placa)
+            print('Carro estacionado')
+
+        if self.tipo == 'Moto':
+            estacionamento.estacionar_moto(self.modelo, self.placa)
+            print('Carro estacionado')
+
+    
+    def sair_da_vaga(self,estacionamento):
+        self.estacionado = False
+
+        if self.tipo == 'Carro':
+            estacionamento.remover_carro(self.placa)
+
+        if self.tipo == 'Moto':
+            estacionamento.remover_moto(self.placa)
+    
+
 
 class Carro(Veiculo):
     def __init__(self, modelo, placa):
@@ -178,10 +200,6 @@ class Carro(Veiculo):
         else:
             return f'{self.modelo} placa {self.placa} - Aguardando para estacionar'
 
-    def estacionar(self, estacionamento):
-        self.estacionado = True
-        estacionamento.estacionar_carro(self.modelo, self.placa)
-        print('Carro estacionado')
 
 
 class Moto(Veiculo):
@@ -198,10 +216,6 @@ class Moto(Veiculo):
             return f'{self.modelo} placa {self.placa} - Aguardando para estacionar'
 
 
-    def estacionar(self, estacionamento):
-        self.estacionado = True
-        estacionamento.estacionar_moto(self.modelo, self.placa)
-        print('Moto estacionada.')
 
 
 
@@ -232,6 +246,10 @@ print('ESTACIONANDO CARRO CRIADO')
 carro_teste.estacionar(estacionamento)
 
 print('-------------------------------------------')
+print('STATUS DO CARRO CRIADO')
+print(carro_teste)
+
+print('-------------------------------------------')
 print('STATUS PÓS ESTACIONAMENTO CARRO')
 estacionamento.status_estacionamento()
 
@@ -240,9 +258,14 @@ print('CRIANDO MOTO')
 moto_teste = Moto('PCX', 'EXX-1234')
 print(moto_teste)
 
+
 print('-------------------------------------------')
 print('ESTACIONANDO MOTO CRIADA')
 moto_teste.estacionar(estacionamento)
+
+print('-------------------------------------------')
+print('STATUS DA MOTO CRIADA')
+print(moto_teste)
 
 print('-------------------------------------------')
 print('STATUS PÓS ESTACIONAMENTO CARRO E MOTO')
@@ -253,32 +276,38 @@ print('LISTANDO CARROS E MOTOS ESTACIONADOS')
 estacionamento.listar_carros_estacionados()
 estacionamento.listar_motos_estacionadas()
 
-# print('REMOVENDO CARRO COM PLACA ERRADA')
-# estacionamento.remover_carro('OOO-1111')
+print('-------------------------------------------')
+print('CARRO DESOCUPANDO VAGA')
+carro_teste.sair_da_vaga(estacionamento)
 
-# print('REMOVENDO CARRO COM PLACA CORRETA')
-# estacionamento.remover_carro('EEE-1234')
+print('-------------------------------------------')
+print('STATUS PÓS REMOÇÃO DO CARRO')
+estacionamento.status_estacionamento()
 
-# print('STATUS PÓS REMOÇÃO DO CARRO')
-# estacionamento.status_estacionamento()
+print('-------------------------------------------')
+print('LISTANDO VAGAS DE CARRO, VAGA DESOCUPADA VOLTA PARA O FINAL DA LISTA DE VAGAS LIVRES')
+estacionamento.listar_vagas_livres_carro()
 
-# print('LISTANDO VAGAS DE CARRO')
-# estacionamento.listar_vagas_livres_carro()
+print('-------------------------------------------')
+print('STATUS DO CARRO QUE ACABOU DE SAIR DA VAGA')
+print(carro_teste)
 
-# print('REMOVENDO MOTO COM PLACA ERRADA')
-# estacionamento.remover_moto('EEE-1234')
 
-# print('REMOVENDO MOTO COM PLACA CORRETA')
-# estacionamento.remover_moto('FFF-0000')
+print('-------------------------------------------')
+print('MOTO DESOCUPANDO VAGA')
+moto_teste.sair_da_vaga(estacionamento)
 
-# print('STATUS PÓS REMOÇÃO DA MOTO')
-# estacionamento.status_estacionamento()
+print('-------------------------------------------')
+print('STATUS PÓS REMOÇÃO DA MOTO')
+estacionamento.status_estacionamento()
 
-# print('LISTANDO VAGAS DE MOTO')
-# estacionamento.listar_vagas_livres_moto()
+print('-------------------------------------------')
+print('LISTANDO VAGAS DE MOTO')
+estacionamento.listar_vagas_livres_moto()
 
-# print('LISTANDO VEICULOS ESTACIONADOS')
-# estacionamento.listar_carros_estacionados()
-# estacionamento.listar_motos_estacionadas()
 
-# carro = Carro('EEE-1234','Palio')
+print('-------------------------------------------')
+print('LISTANDO VEICULOS ESTACIONADOS')
+estacionamento.listar_carros_estacionados()
+estacionamento.listar_motos_estacionadas()
+
