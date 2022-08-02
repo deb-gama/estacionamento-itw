@@ -58,10 +58,10 @@ class Estacionamento():
             print('Não existem motos estacionadas no momento.')
     
 
-    def estacionar_carro(self, modelo, placa, vaga_id):
+    def estacionar_carro(self, modelo, placa):
         self.modelo = modelo
         self.placa = placa
-        self.vaga = vaga_id
+        # self.vaga = vaga_id
     
         if self.vagas_carro > 0:
             self.vagas_carro -= 1
@@ -70,9 +70,11 @@ class Estacionamento():
             vaga_livre_carro.livre = False
             self.carros_estacionados.append(vaga_livre_carro)
             print(vaga_livre_carro)
+        else:
+            print('Não existem vagas livres para carros no momento.')
       
             
-    def estacionar_moto(self, modelo, placa, vaga_id):
+    def estacionar_moto(self, modelo, placa):
         self.modelo = modelo
         self.placa = placa
         self.vaga = vaga_id
@@ -84,6 +86,16 @@ class Estacionamento():
             vaga_livre_moto.livre = False
             self.motos_estacionadas.append(vaga_livre_moto)
             print(vaga_livre_moto)
+    
+        elif self.vagas_carro > 0:
+            self.vagas_carro -= 1
+            vaga_livre_moto = self.vagas_livres_carro.pop(0)
+            vaga_livre_moto.placa = placa
+            vaga_livre_moto.livre = False
+            self.carros_estacionados.append(vaga_livre_moto)
+            print(vaga_livre_moto)
+        else:
+            print('Não existem vagas livres para motos no momento.')
            
             
 
@@ -110,12 +122,6 @@ class Estacionamento():
             else:
                 print('Placa não encontrada.')
 
-        
-# estacionamento = Estacionamento()
-# estacionamento.status_estacionamento()
-# estacionamento.estacionar_carro('Ford Ka','EXX-1234','1')
-# estacionamento.estacionar_carro('Palio', 'EEE-2222', '2')
-# estacionamento.status_estacionamento()
 
 class Vaga:
     def __init__(self):
@@ -130,7 +136,7 @@ class VagaMoto(Vaga):
         self.vaga_id = uuid.uuid4()
         self.tipo = 'Moto'
         self.livre = True
-        # print(f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}')
+
 
     def __str__(self) -> str:
         if not self.livre:
@@ -145,7 +151,6 @@ class VagaCarro(Vaga):
         self.vaga_id = uuid.uuid4()
         self.tipo = 'Carro'
         self.livre = True
-        # print(f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}')
 
     def __str__(self) -> str:
         if not self.livre:
@@ -154,30 +159,30 @@ class VagaCarro(Vaga):
             return f'Vaga tipo: {self.tipo}, Id - {self.vaga_id}, Status - Livre'
 
 
-
-
-# placas = ['eee-1234','eee-1235','eee-1236']
-# vagas = []
-
-# for placa in placas:
-#     vaga = VagaMoto(placa)
-
-# for placa in placas:
-#     vaga = VagaCarro(placa)
-  
-
 class Carro:
-    def __init__(self, placa, modelo):
+    def __init__(self, modelo, placa):
         self.estacionado = False
         self.placa = placa
         self.modelo = modelo
 
+    def __str__(self) -> str:
         if self.estacionado is True:
-            print(f'{self.modelo} placa {self.placa} - Estacionado')
-        else :
-            print(f'{self.modelo} placa {self.placa} - Aguardando para estacionar')
+            return f'{self.modelo} placa {self.placa} - Estacionado'
+        else:
+            return f'{self.modelo} placa {self.placa} - Aguardando para estacionar'
 
 
+
+    def estacionar(self, estacionamento):
+        self.estacionado = True
+        estacionamento.estacionar_carro(self.modelo, self.placa)
+        print('Carro estacionado')
+
+    
+
+
+
+# EXECUTANDO O CÓDIGO
 
 estacionamento = Estacionamento()
 
@@ -193,47 +198,52 @@ criando_vagas()
 print('PRIMEIRO STATUS')
 estacionamento.status_estacionamento()
 
-print('ESTACIONANDO CARRO')
-estacionamento.estacionar_carro('Palio', 'EEE-1234', '2455353')
+print('CRIANDO CARRO')
+carro_teste = Carro('Palio', 'EEE-1234')
+print(carro_teste)
+
+print('ESTACIONANDO CARRO CRIADO')
+carro_teste.estacionar(estacionamento)
+
 print('STATUS PÓS ESTACIONAMENTO CARRO')
 estacionamento.status_estacionamento()
 
 
-print('ESTACIONANDO MOTO')
-estacionamento.estacionar_moto('PCX', 'FFF-0000', 'SYD353')
-print('STATUS PÓS ESTACIONAMENTO CARRO E MOTO')
-estacionamento.status_estacionamento()
+# print('ESTACIONANDO MOTO')
+# estacionamento.estacionar_moto('PCX', 'FFF-0000', 'SYD353')
+# print('STATUS PÓS ESTACIONAMENTO CARRO E MOTO')
+# estacionamento.status_estacionamento()
 
-print('LISTANDO CARROS E MOTOS ESTACIONADOS')
-estacionamento.listar_carros_estacionados()
-estacionamento.listar_motos_estacionadas()
+# print('LISTANDO CARROS E MOTOS ESTACIONADOS')
+# estacionamento.listar_carros_estacionados()
+# estacionamento.listar_motos_estacionadas()
 
-print('REMOVENDO CARRO COM PLACA ERRADA')
-estacionamento.remover_carro('OOO-1111')
+# print('REMOVENDO CARRO COM PLACA ERRADA')
+# estacionamento.remover_carro('OOO-1111')
 
-print('REMOVENDO CARRO COM PLACA CORRETA')
-estacionamento.remover_carro('EEE-1234')
+# print('REMOVENDO CARRO COM PLACA CORRETA')
+# estacionamento.remover_carro('EEE-1234')
 
-print('STATUS PÓS REMOÇÃO DO CARRO')
-estacionamento.status_estacionamento()
+# print('STATUS PÓS REMOÇÃO DO CARRO')
+# estacionamento.status_estacionamento()
 
-print('LISTANDO VAGAS DE CARRO')
-estacionamento.listar_vagas_livres_carro()
+# print('LISTANDO VAGAS DE CARRO')
+# estacionamento.listar_vagas_livres_carro()
 
-print('REMOVENDO MOTO COM PLACA ERRADA')
-estacionamento.remover_moto('EEE-1234')
+# print('REMOVENDO MOTO COM PLACA ERRADA')
+# estacionamento.remover_moto('EEE-1234')
 
-print('REMOVENDO MOTO COM PLACA CORRETA')
-estacionamento.remover_moto('FFF-0000')
+# print('REMOVENDO MOTO COM PLACA CORRETA')
+# estacionamento.remover_moto('FFF-0000')
 
-print('STATUS PÓS REMOÇÃO DA MOTO')
-estacionamento.status_estacionamento()
+# print('STATUS PÓS REMOÇÃO DA MOTO')
+# estacionamento.status_estacionamento()
 
-print('LISTANDO VAGAS DE MOTO')
-estacionamento.listar_vagas_livres_moto()
+# print('LISTANDO VAGAS DE MOTO')
+# estacionamento.listar_vagas_livres_moto()
 
-print('LISTANDO VEICULOS ESTACIONADOS')
-estacionamento.listar_carros_estacionados()
-estacionamento.listar_motos_estacionadas()
+# print('LISTANDO VEICULOS ESTACIONADOS')
+# estacionamento.listar_carros_estacionados()
+# estacionamento.listar_motos_estacionadas()
 
 # carro = Carro('EEE-1234','Palio')
