@@ -10,7 +10,6 @@
 #  - deve serpossível saber quantas vagas ainda estão disponíveis para estacionar- motos e carros
 
 import uuid
-import os
 
 # devo saber o total vagas
 # total de vagas de cada tipo
