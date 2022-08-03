@@ -8,6 +8,8 @@ Os principais conceitos presentes são:
 - Herança
 - Modelagem de classes
 - Lógica em Python
+- Conventional Commits
+- GIT
 
 ## Bibiotecas utilizadas
 
@@ -45,4 +47,8 @@ Os principais conceitos presentes são:
 
 ## Demonstrações adicionais
 
-A partir da linha 385 existem funções criadas para validar as regras de negócio de forma automática com funções que chamam os métodos sem o uso da interação com o terminal. Para visualizá-los, comente o trecho de código referente a primeira execução e siga as instruções documentadas.
+A partir da linha 366 existem funções criadas para validar as regras de negócio de forma automática com funções que chamam os métodos sem o uso da interação com o terminal. Para visualizá-los, comente o trecho de código referente a primeira execução e siga as instruções documentadas.
+
+## Implementações futuras
+
+Funcionalidade de alteração de determinados dados previamente cadastrados com o uso de Sette e Getters.

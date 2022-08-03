@@ -1,19 +1,5 @@
-# REGRAS DE NEGÓCIO
-
-# ESTACIONAMENTO:
-#  - pátio com 50 vagas
-#  - 25 vagas para motos e 25 vagas para carros
-#  - carros e motos identificados por suas placas
-#  - vagas identificadas por um número (id único)
-#  - carros só estacionam em vagas para carros, motos estacionam prefrencialmente em vagas para motos, mas podem estacionar em vagas de carro caso não hajam mais vagas de moto disponíveis
-#  - quando o dono vier buscar o carro, devemos poder saber automaticamente qual carro está em qual vaga (placa X- vaga - id X)
-#  - deve serpossível saber quantas vagas ainda estão disponíveis para estacionar- motos e carros
-
 import uuid
 
-# devo saber o total vagas
-# total de vagas de cada tipo
-# total de vagas livres
 class Estacionamento():
     def __init__(self, nome):
         self.vagas_carro = 0
@@ -128,21 +114,17 @@ class Estacionamento():
                 for moto in self.motos_estacionadas:
                     if moto.placa == placa:
                         print(moto)
-                    else:
-                        print('Placa não encontrada.')
+                    else print('Placa não encontrada.')
+
         if veiculo == 'Carro':
             if len(self.carros_estacionados) <= 0:
                 print('Não existem carros estacionadas.')
             else:
                 for carro in self.carros_estacionados:
-                    if len(self.carros_estacionados) <=0:
-                        print('Não existem carros estacionados.')
                     if carro.placa == placa:
                         print(carro)
                     else:
                         print('Placa não encontrada.')
-
-
 
 
 class Vaga:
@@ -243,22 +225,19 @@ class Moto(Veiculo):
 
 
 
-
-
-
 # # EXECUTANDO O CÓDIGO
 
-# print('-------------------------------------------')
-# print('Bem vindo ao Instruct Parking Lot! Por favor digite o nome do seu Estacionamento:')
-# nome_estacionamento = str(input())
-# estacionamento = Estacionamento(nome_estacionamento)
-# estacionamento_login = True
+print('-------------------------------------------')
+print('Bem vindo ao Instruct Parking Lot! Por favor digite o nome do seu Estacionamento:')
+nome_estacionamento = str(input())
+estacionamento = Estacionamento(nome_estacionamento)
+estacionamento_login = True
 
-# print(f'{nome_estacionamento} é ótimo tê-los conosco.Por favor informe a quantidade de vagas para motos:')
-# qtdade_vagas_moto = int(input())
+print(f'{nome_estacionamento} é ótimo tê-los conosco.Por favor informe a quantidade de vagas para motos:')
+qtdade_vagas_moto = int(input())
 
-# print('Por favor nos informe a quantidade de vagas para carros:')
-# qtdade_vagas_carro = int(input())
+print('Por favor nos informe a quantidade de vagas para carros:')
+qtdade_vagas_carro = int(input())
 
 
 def criando_vagas(qtdade_vaga_carros, qtdade_vagas_motos):
@@ -272,130 +251,130 @@ def criando_vagas(qtdade_vaga_carros, qtdade_vagas_motos):
         estacionamento.vagas_carro = qtdade_vaga_carros
         estacionamento.vagas_livres_carro.append(vaga_carro)
 
-# criando_vagas(qtdade_vagas_carro, qtdade_vagas_moto)
+criando_vagas(qtdade_vagas_carro, qtdade_vagas_moto)
 
-# print('-------------------------------------------')
-# estacionamento.status_estacionamento()
+print('-------------------------------------------')
+estacionamento.status_estacionamento()
 
 
-# def menu():
-#     print('-------------------------------------------')
-#     msg_menu = 'O que você deseja fazer?\nEstacionar: digite "e"\nRemover veículo da vaga: "r"\nStatus do Estacionamento: "s"\nBuscar carro: "b"\nListar veiculos estacinados: "l"\nSair: "CTRL+c"'
-#     print(msg_menu)
+def menu():
+    print('-------------------------------------------')
+    msg_menu = 'O que você deseja fazer?\nEstacionar: digite "e"\nRemover veículo da vaga: "r"\nStatus do Estacionamento: "s"\nBuscar carro: "b"\nListar veiculos estacinados: "l"\nSair: "CTRL+c"'
+    print(msg_menu)
 
-#     opcao = str(input()) 
+    opcao = str(input()) 
 
-#     if opcao == 's':
-#         print('-------------------------------------------')
-#         estacionamento.status_estacionamento()
+    if opcao == 's':
+        print('-------------------------------------------')
+        estacionamento.status_estacionamento()
  
 
-#     if opcao == 'l':
-#         print('-------------------------------------------')
-#         print('Lista de carros: "c"\nLista de motos: "m')
-#         tipo = str(input())
+    if opcao == 'l':
+        print('-------------------------------------------')
+        print('Lista de carros: "c"\nLista de motos: "m')
+        tipo = str(input())
 
-#         if tipo == 'c':
-#             print('-------------------------------------------')
-#             estacionamento.listar_carros_estacionados()
+        if tipo == 'c':
+            print('-------------------------------------------')
+            estacionamento.listar_carros_estacionados()
 
-#         if tipo == 'm':
-#             print('-------------------------------------------')
-#             estacionamento.listar_motos_estacionadas()
+        if tipo == 'm':
+            print('-------------------------------------------')
+            estacionamento.listar_motos_estacionadas()
         
 
-#     if opcao == 'b':
-#         print('-------------------------------------------')
-#         print('O veiculo é um carro ou uma moto? Digite "m" para moto ou "c" para carro:')
-#         tipo = str(input())
-
-#         if tipo == 'c':
-#             print('Digite a placa do veiculo que deseja consultar:')
-#             placa = str(input())
-#             veiculo = 'Carro'
-#             print('-------------------------------------------')
-#             estacionamento.consultar_por_placa(veiculo, placa)
+    if opcao == 'b':
+        print('-------------------------------------------')
+        print('O veiculo é um carro ou uma moto? Digite "m" para moto ou "c" para carro:')
+        tipo = str(input())
+        
+        print('Digite a placa do veiculo que deseja consultar:')
+        placa = str(input())
+        if tipo == 'c':
+            carro = 'Carro'
+            print('-------------------------------------------')
+            estacionamento.consultar_por_placa(carro, placa)
        
-#         if tipo == 'm':
-#             print('Digite a placa do veículo que deseja consultar:')
-#             placa = str((input))
-#             veiculo = 'Moto'
-#             print('-------------------------------------------')
-#             estacionamento.remover_moto(placa, veiculo)
+        if tipo == 'm':
+            moto = 'Moto'
+            print('-------------------------------------------')
+            estacionamento.consultar_por_placa(moto, placa)
  
  
 
-#     if opcao == 'r':
-#         print('-------------------------------------------')
-#         print('O veiculo é um carro ou uma moto? Digite "m" para moto ou "c" para carro:')
-#         tipo = str(input())
-#         print('-------------------------------------------')
-#         print('Digite a placa do veículo que deseja remover:')
-#         placa = str(input())
+    if opcao == 'r':
+        print('-------------------------------------------')
+        print('O veiculo é um carro ou uma moto? Digite "m" para moto ou "c" para carro:')
+        tipo = str(input())
+        print('-------------------------------------------')
+        print('Digite a placa do veículo que deseja remover:')
+        placa = str(input())
 
-#         if tipo == 'c':
-#             print('-------------------------------------------')
-#             estacionamento.remover_carro(placa)
-#         if tipo == 'm':
-#             print('-------------------------------------------')
-#             estacionamento.remover_moto(placa)
+        if tipo == 'c':
+            print('-------------------------------------------')
+            estacionamento.remover_carro(placa)
+        if tipo == 'm':
+            print('-------------------------------------------')
+            estacionamento.remover_moto(placa)
        
 
-#     if opcao == 'e':
-#         print('-------------------------------------------')
-#         print('Que tipo de vaga você deseja cadastrar? Digite c para carro ou m para moto:')
-#         tipo_de_vaga_opcao = str(input()) 
+    if opcao == 'e':
+        print('-------------------------------------------')
+        print('Que tipo de vaga você deseja cadastrar? Digite c para carro ou m para moto:')
+        tipo_de_vaga_opcao = str(input()) 
     
 
-#         if tipo_de_vaga_opcao == 'c':
-#             print('Digite o modelo do veículo:')
-#             modelo = str(input())
-#             print('Digite a placa do veiculo:')
-#             placa = str(input())
-#             carro_cadastrado = Carro(modelo,placa)
-#             print(carro_cadastrado)
-#             print('-------------------------------------------')
-#             print('Estacionar? s para sim, n para não:')
-#             resposta = str(input())
-#             if resposta == 's':
-#                 print('-------------------------------------------')
-#                 print(f'Concluído! Detalhes da operação:')
-#                 carro_cadastrado.estacionar(estacionamento)
+        if tipo_de_vaga_opcao == 'c':
+            print('Digite o modelo do veículo:')
+            modelo = str(input())
+            print('Digite a placa do veiculo:')
+            placa = str(input())
+            carro_cadastrado = Carro(modelo,placa)
+            print(carro_cadastrado)
+            print('-------------------------------------------')
+            print('Estacionar? s para sim, n para não:')
+            resposta = str(input())
+            if resposta == 's':
+                print('-------------------------------------------')
+                print(f'Concluído! Detalhes da operação:')
+                carro_cadastrado.estacionar(estacionamento)
 
-#         if tipo_de_vaga_opcao == 'm':
-#             print('Digite o modelo do veículo:')
-#             modelo = str(input())
-#             print('Digite a placa do veiculo:')
-#             placa = str(input())
-#             moto_cadastrada = Moto(modelo,placa)
-#             print(moto_cadastrada)
-#             print('-------------------------------------------')
-#             print('Estacionar? s para sim, n para não:')
-#             resposta = str(input())
-#             if resposta == 's':
-#                 print('-------------------------------------------')
-#                 print(f'Concluído! Detalhes da operação:')
-#                 moto_cadastrada.estacionar(estacionamento)
+        if tipo_de_vaga_opcao == 'm':
+            print('Digite o modelo do veículo:')
+            modelo = str(input())
+            print('Digite a placa do veiculo:')
+            placa = str(input())
+            moto_cadastrada = Moto(modelo,placa)
+            print(moto_cadastrada)
+            print('-------------------------------------------')
+            print('Estacionar? s para sim, n para não:')
+            resposta = str(input())
+            if resposta == 's':
+                print('-------------------------------------------')
+                print(f'Concluído! Detalhes da operação:')
+                moto_cadastrada.estacionar(estacionamento)
 
 
-# while estacionamento:
-#     menu()
+while estacionamento:
+    menu()
 
 
 # COBRINDO REGRAS DE NEGÓCIO
 
-estacionamento = Estacionamento('Teste')
+# DESCOMENTE
 
-criando_vagas(25,25)
+# estacionamento = Estacionamento('Teste')
+# criando_vagas(25,25)
 
-estacionamento.status_estacionamento()
+# estacionamento.status_estacionamento()
+# print('---------------')
 
-moto = Moto('PCX', 'EEE-1234')
-carro = Carro('Palio', 'EEE-1234')
-
-# REGRA: Motos devem estacionar preferencialmente nas vagas de moto. Se acabarem, podem estacionar nas vagas livres de carro
+# moto = Moto('PCX', 'EEE-1234')
+# carro = Carro('Palio', 'EEE-1234')
 
 # -----
+# REGRA: Motos devem estacionar preferencialmente nas vagas de moto. Se acabarem, podem estacionar nas vagas livres de carro
+
 # DESCOMENTE PARA VER RESPOSTA NO CONSOLE
 # for _ in range(37):
 #     estacionamento.estacionar_moto(moto.modelo, moto.placa)
@@ -404,6 +383,32 @@ carro = Carro('Palio', 'EEE-1234')
 #     estacionamento.estacionar_moto(moto.modelo, moto.placa)
 
 
-# Carros estacionam apenas nas 25 vagas de carros disponíveis
+# REGRA: Carros estacionam apenas nas 25 vagas de carros disponíveis
 # for _ in range(25):
 #     estacionamento.estacionar_carro(carro.modelo, carro.placa)
+
+
+# moto_teste1 = Moto('PCX', 'EEE-1111')
+# moto_teste2 = Moto('PCX', 'EEE-2222')
+# moto_teste3 = Moto('PCX', 'EEE-3333')
+
+# estacionamento.listar_vagas_livres_moto()
+
+# print('---------------')
+# ao estacionar, a primeira vaga livre é selecionada, observe que, ao ter o veículo removido, a vaga de mesmo id volta para o final da lista de vagas disponíveis
+# moto_teste1.estacionar(estacionamento)
+
+# print('---------------')
+# moto_teste2.estacionar(estacionamento)
+
+# print('---------------')
+# estacionamento.listar_motos_estacionadas()
+
+# print('---------------')
+# moto_teste1.sair_da_vaga(estacionamento, moto_teste1.placa)
+
+# print('---------------')
+# estacionamento.listar_motos_estacionadas()
+
+# print('---------------')
+# estacionamento.listar_vagas_livres_moto()
