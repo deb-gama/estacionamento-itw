@@ -48,8 +48,7 @@ class Estacionamento():
         self.modelo = modelo
         self.placa = placa
     
-        if self.vagas_carro > 0:
-            self.vagas_carro -= 1
+        if len(self.vagas_livres_carro) > 0:
             vaga_livre_carro = self.vagas_livres_carro.pop(0)
             vaga_livre_carro.placa = placa
             vaga_livre_carro.livre = False
@@ -63,16 +62,14 @@ class Estacionamento():
         self.modelo = modelo
         self.placa = placa
     
-        if self.vagas_moto > 0:
-            self.vagas_moto -= 1
+        if len(self.vagas_livres_moto) > 0:
             vaga_livre_moto = self.vagas_livres_moto.pop(0)
             vaga_livre_moto.placa = placa
             vaga_livre_moto.livre = False
             self.motos_estacionadas.append(vaga_livre_moto)
             print(vaga_livre_moto)
     
-        elif self.vagas_carro > 0:
-            self.vagas_carro -= 1
+        elif len(self.vagas_livres_carro) > 0:
             vaga_livre_moto = self.vagas_livres_carro.pop(0)
             vaga_livre_moto.placa = placa
             vaga_livre_moto.livre = False
@@ -90,9 +87,7 @@ class Estacionamento():
                 carro_removido.livre = True
                 self.vagas_livres_carro.append(carro_removido)
                 print(f'Carro, placa: {placa} removido com sucesso.')
-            else:
-                print('Placa não encontrada.')
-
+  
 
     def remover_moto(self,placa):
         for moto in self.motos_estacionadas:
@@ -102,8 +97,7 @@ class Estacionamento():
                 moto_removida.livre = True
                 self.vagas_livres_moto.append(moto_removida)
                 print(f'Moto, placa: {placa} removida com sucesso.')
-            else:
-                print('Placa não encontrada.')
+      
 
     
     def consultar_por_placa(self, veiculo, placa):
@@ -114,8 +108,6 @@ class Estacionamento():
                 for moto in self.motos_estacionadas:
                     if moto.placa == placa:
                         print(moto)
-                    else print('Placa não encontrada.')
-
         if veiculo == 'Carro':
             if len(self.carros_estacionados) <= 0:
                 print('Não existem carros estacionadas.')
@@ -123,8 +115,7 @@ class Estacionamento():
                 for carro in self.carros_estacionados:
                     if carro.placa == placa:
                         print(carro)
-                    else:
-                        print('Placa não encontrada.')
+       
 
 
 class Vaga:
@@ -177,11 +168,13 @@ class Veiculo:
 
         if self.tipo == 'Carro':
             estacionamento.estacionar_carro(self.modelo, self.placa)
-            print('Carro estacionado')
+            if len(estacionamento.vagas_livres_carro) > 0:
+                print('Carro estacionado')
 
         if self.tipo == 'Moto':
             estacionamento.estacionar_moto(self.modelo, self.placa)
-            print('Moto estacionada')
+            if len(estacionamento.vagas_livres_moto) > 0:
+                print('Moto estacionada')
 
     
     def sair_da_vaga(self,estacionamento, placa):
@@ -225,10 +218,10 @@ class Moto(Veiculo):
 
 
 
-# # EXECUTANDO O CÓDIGO
+# # EXECUTANDO O CÓDIGO - ABRA O TERMINAL E EXPLORE O SISTEMA
 
 print('-------------------------------------------')
-print('Bem vindo ao Instruct Parking Lot! Por favor digite o nome do seu Estacionamento:')
+print('Bem vindo ao Instruct Park System! Por favor digite o nome do seu Estacionamento:')
 nome_estacionamento = str(input())
 estacionamento = Estacionamento(nome_estacionamento)
 estacionamento_login = True
@@ -361,7 +354,7 @@ while estacionamento:
 
 # COBRINDO REGRAS DE NEGÓCIO
 
-# DESCOMENTE
+# DESCOMENTE a função "criando_vagas" na linha 234 para que esses blocos de código funcionem
 
 # estacionamento = Estacionamento('Teste')
 # criando_vagas(25,25)
@@ -372,10 +365,10 @@ while estacionamento:
 # moto = Moto('PCX', 'EEE-1234')
 # carro = Carro('Palio', 'EEE-1234')
 
-# -----
-# REGRA: Motos devem estacionar preferencialmente nas vagas de moto. Se acabarem, podem estacionar nas vagas livres de carro
 
-# DESCOMENTE PARA VER RESPOSTA NO CONSOLE
+# print('---------------')
+# print('REGRA: Motos devem estacionar preferencialmente nas vagas de moto. Se acabarem, podem estacionar nas vagas livres de carro')
+# print('---------------')
 # for _ in range(37):
 #     estacionamento.estacionar_moto(moto.modelo, moto.placa)
 
@@ -383,7 +376,10 @@ while estacionamento:
 #     estacionamento.estacionar_moto(moto.modelo, moto.placa)
 
 
-# REGRA: Carros estacionam apenas nas 25 vagas de carros disponíveis
+# print('---------------')
+# print('REGRA: Carros estacionam apenas nas 25 vagas de carros disponíveis')
+
+# print('---------------')
 # for _ in range(25):
 #     estacionamento.estacionar_carro(carro.modelo, carro.placa)
 
@@ -395,7 +391,9 @@ while estacionamento:
 # estacionamento.listar_vagas_livres_moto()
 
 # print('---------------')
-# ao estacionar, a primeira vaga livre é selecionada, observe que, ao ter o veículo removido, a vaga de mesmo id volta para o final da lista de vagas disponíveis
+# print('Ao estacionar, a primeira vaga livre é selecionada, observe que, ao ter o veículo removido, a vaga de mesmo id volta para o final da lista de vagas disponíveis')
+
+# print('---------------')
 # moto_teste1.estacionar(estacionamento)
 
 # print('---------------')

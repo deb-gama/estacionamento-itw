@@ -47,8 +47,10 @@ Os principais conceitos presentes são:
 
 ## Demonstrações adicionais
 
-A partir da linha 366 existem funções criadas para validar as regras de negócio de forma automática com funções que chamam os métodos sem o uso da interação com o terminal. Para visualizá-los, comente o trecho de código referente a primeira execução e siga as instruções documentadas.
+A partir da linha 355 existem funções criadas para validar as regras de negócio de forma automática com funções que chamam os métodos sem o uso da interação com o terminal. Para visualizá-los, comente o trecho de código referente a primeira execução e siga as instruções documentadas.
 
 ## Implementações futuras
 
 Funcionalidade de alteração de determinados dados previamente cadastrados com o uso de Sette e Getters.
+Validações para tratameto de letras maiúsculas e minúsculas inseridas nos inputs.
+Criação e integração com banco de dados
