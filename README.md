@@ -27,7 +27,7 @@ Os principais conceitos presentes são:
 
 ## Funcionamento do projeto
 
-    Com base no desafio proposto, foi criado um sistema básico de controle de estacionamento que poderia ser utilizado em um negócio de qualquer porte. O projeto é customizado com o nome do estabelecimento e o número de vagas de motos e carros é criado dinamicamente assim como os Id's de cada vaga.
+Com base no desafio proposto, foi criado um sistema básico de controle de estacionamento que poderia ser utilizado em um negócio de qualquer porte. O projeto é customizado com o nome do estabelecimento e o número de vagas de motos e carros é criado dinamicamente assim como os Id's de cada vaga.
 
 ## Como utilizar:
 
