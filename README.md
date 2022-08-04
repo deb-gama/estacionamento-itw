@@ -31,7 +31,7 @@ Os principais conceitos presentes são:
 
 ## Como utilizar:
 
-- Execute o arquivo python pelo terminal da sua IDE e siga o passo-a-passo indicado no terminal. As regras de negócio foram atendidas com a criação de um menu que realiza as funções solicitadas.
+- Execute o arquivo python pelo terminal e siga o passo-a-passo indicado para realizar as ações do sistema. As regras de negócio foram atendidas com a criação de um menu que realiza as funções solicitadas.
 
 **MENU**
 

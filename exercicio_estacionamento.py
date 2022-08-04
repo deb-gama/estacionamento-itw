@@ -313,7 +313,7 @@ def menu():
 
     if opcao == 'e':
         print('-------------------------------------------')
-        print('Que tipo de vaga você deseja cadastrar? Digite c para carro ou m para moto:')
+        print('Que tipo de vaga você deseja cadastrar? Digite "m" para moto ou "c" para carro:')
         tipo_de_vaga_opcao = str(input()) 
     
 
@@ -340,7 +340,7 @@ def menu():
             moto_cadastrada = Moto(modelo,placa)
             print(moto_cadastrada)
             print('-------------------------------------------')
-            print('Estacionar? s para sim, n para não:')
+            print('Estacionar? "s" para sim, "n" para não:')
             resposta = str(input())
             if resposta == 's':
                 print('-------------------------------------------')
