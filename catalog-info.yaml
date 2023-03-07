@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: estacionamento-itw
+  annotations:
+    github.com/project-slug: deb-gama/estacionamento-itw
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: other
+  lifecycle: unknown
+  owner: school-devops
