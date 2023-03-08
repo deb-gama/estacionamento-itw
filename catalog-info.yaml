@@ -4,6 +4,7 @@ metadata:
   name: estacionamento-itw
   annotations:
     github.com/project-slug: deb-gama/estacionamento-itw
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: other
   lifecycle: unknown
